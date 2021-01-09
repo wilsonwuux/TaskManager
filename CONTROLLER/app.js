@@ -14,7 +14,7 @@ class Task {
     this.description=description
 
 }
-//
+////
 }
 // manejar interface grafica DOM 
 class  Ui{
