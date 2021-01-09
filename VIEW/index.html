@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://bootswatch.com/4/minty/bootstrap.min.css">
+    <title>Document</title>
+</head>
+<body>
+<div class="container mt-4">
+    <h2 class="display-4 text-center">Actividades para <span class="text-primary">HOY</span></h2>
+    <h5 class="text-center  "><span class="text-secondary">Registra y controla </span> tus actividades <span class="text-secondary">diarias mas importantes</span></h5>
+    
+    <button id="btnCollapse" type="button" class="btn btn-primary" data-toggle="collapse" data-target="#newAct">Nueva Actividad</button>
+        <div id="newAct" class="collapse">
+        <form id="tarea-form">
+            <div class="form-group">
+                <label for="actividad">Actividad</label>
+                <input type="text" id="actividad" class="form-control" placeholder="Que haremos hoy?">
+            </div>
+            <div class="form-group">
+                <label for="lugar">Hora | Lugar | Persona</label>
+                <input type="text" id="lugar" class="form-control" placeholder="Donde o con quien sera? ">
+            </div>
+            <div class="form-group">
+                <label for="description">Descripcion </label>
+                <input type="text" id="description" class="form-control" placeholder="Como lo vas a hacer? ">
+            </div>
+            <input type="submit" class="btn btn-primary btn-block" value="Agregar Actividad">
+        </form>
+        </div>
+<!--  -->
+
+    <table class="table table-striped ">
+        <thead>
+            <tr>
+                <th>Actividad</th>
+                <th>Lugar</th>
+                <th>descripcion</th>  
+            </tr>
+        </thead>
+        <tbody id="tarea-list">
+
+        </tbody>
+
+    </table>
+  </div>
+
+<script type="text/javascript" src="../CONTROLLER/app.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" 
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" 
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" 
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" 
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" 
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" 
+        crossorigin="anonymous"></script>
+</body>
+</html>
