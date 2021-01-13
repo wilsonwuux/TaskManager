@@ -6,13 +6,13 @@
 
 class Task {
     //modelo de objeto libro para localstorage 
-    constructor(actividad,lugar,description)
+    constructor(actividad,lugar,description,id)
 {
     // referncia.parametro = parametro
     this.actividad=actividad,
     this.lugar=lugar,
-    this.description=description
-
+    this.description=description,
+    this.id=id
 }
 //
 }
@@ -32,6 +32,7 @@ class  Ui{
             <td>${tarea.actividad}</td>
              <td>${tarea.lugar}</td>
               <td>${tarea.description}</td>
+              <td>${tarea.id}</td>
                <td> <a href="#" class="btn btn-danger btn-sm delete">X</a></td>`
 
                lista.appendChild(filas)
@@ -40,6 +41,7 @@ class  Ui{
     static eliminarTarea(el){
         if(el.classList.contains('delete')){
             el.parentElement.parentElement.remove();
+            Ui.mostrarAlerta('ACTIVIDAD TERMINADA','secondary')
         }
     }
     //mensaje para mostrar en la infaz grafica 
@@ -84,13 +86,15 @@ class Datos{
         // obeter arreglo del metodo superior
         const tareas = Datos.traerTareas()
         tareas.push(tarea)
+        let resultado = tareas.map(a => a.id +=1)
         localStorage.setItem('tareas',JSON.stringify(tareas));
     }
     // eliminar mediante un codigo unico 
-    static removerTarea(description){
+    static removerTarea(id){
         const tareas = Datos.traerTareas()
+
         tareas.forEach((tarea,index)=>{
-            if(tarea.description === description){
+            if(tarea.id == id){
                 tareas.splice(index,1)
             }
         });
@@ -103,27 +107,35 @@ document.addEventListener('DOMContentLoaded',Ui.mostrarTareas())
 
 //control de evento submit que no recargue la pag
 document.querySelector('#tarea-form').addEventListener('submit',(e)=>{
-    e.preventDefault();
+   e.preventDefault()
     const actividad = document.querySelector('#actividad').value;
     const lugar = document.querySelector('#lugar').value;
     const description = document.querySelector('#description').value;
-    if(actividad ==='' || lugar==='' || description===''){
+    const id=0;
+    if(actividad ===''&& lugar===''&& description===''){ 
+        Ui.mostrarAlerta('COMPLETE LOS CAMPOS','danger')
+        }else if(actividad ===''){
     //mostar mensaje de clase ui 
-    Ui.mostrarAlerta('complete los campos','danger')
-
+    Ui.mostrarAlerta('complete campo ACTIVIDAD','danger')
+    }else if(lugar===''){ 
+    Ui.mostrarAlerta('complete campo LUGAR','danger')
+    }else if(description===''){ 
+    Ui.mostrarAlerta('complete campo DESCRIPCION','danger')
     }else{
         // ya validado ubica informacion en la clase libro 
-        const tarea = new Task(actividad,lugar,description);
-
+        const tarea = new Task(actividad,lugar,description,id);
         Datos.agregarUntarea(tarea)
+
         Ui.agregarTareaLista(tarea)
         Ui.mostrarAlerta('ACTIVIDAD AGREGADA','success')
         Ui.limpiarCampos()
+        location.reload()
     }
 })
 
 document.querySelector('#tarea-list').addEventListener('click',(e)=>{
+   
     Ui.eliminarTarea(e.target)
     Datos.removerTarea(e.target.parentElement.previousElementSibling.textContent)
-    Ui.mostrarAlerta('ACTIVIDAD TERMINADA','secondary')
+   
 })
