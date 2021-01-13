@@ -11,41 +11,47 @@
     <h6 class="text-left  "><span class="text-secondary">Desarrollado </span> Por <span class="text-secondary"> Wilson</span></h6>
     <h2 class="display-4 text-center">Actividades para <span class="text-primary">HOY</span></h2>
     <h5 class="text-center  "><span class="text-secondary">Registra y controla </span> tus actividades <span class="text-secondary">diarias mas importantes</span></h5>
-    
-    <button id="btnCollapse" type="button" class="btn btn-primary" data-toggle="collapse" data-target="#newAct">Nueva Actividad</button>
-        <div id="newAct" class="collapse">
-        <form id="tarea-form">
-            <div class="form-group">
-                <label for="actividad">Actividad</label>
-                <input type="text" id="actividad" class="form-control" placeholder="Que haremos hoy?">
+    <div class="row rowdiv">
+        <div class="col coldiv">
+            <button id="btnCollapse" type="button" class="btn btn-primary" data-toggle="collapse" data-target="#newAct">Nueva Actividad</button>
+            <div id="newAct" class="collapse">
+            <form id="tarea-form">
+                <div class="form-group">
+                    <label for="actividad">Actividad</label>
+                    <input type="text" id="actividad" class="form-control" placeholder="Que haremos hoy?">
+                </div>
+                <div class="form-group">
+                    <label for="lugar">Hora | Lugar | Persona</label>
+                    <input type="text" id="lugar" class="form-control" placeholder="Donde o con quien sera? ">
+                </div>
+                <div class="form-group">
+                    <label for="description">Descripcion </label>
+                    <input type="text" id="description" class="form-control" placeholder="Como lo vas a hacer? ">
+                </div>
+                <input type="submit" class="btn btn-primary btn-block" value="Agregar Actividad">
+            </form>
             </div>
-            <div class="form-group">
-                <label for="lugar">Hora | Lugar | Persona</label>
-                <input type="text" id="lugar" class="form-control" placeholder="Donde o con quien sera? ">
-            </div>
-            <div class="form-group">
-                <label for="description">Descripcion </label>
-                <input type="text" id="description" class="form-control" placeholder="Como lo vas a hacer? ">
-            </div>
-            <input type="submit" class="btn btn-primary btn-block" value="Agregar Actividad">
-        </form>
         </div>
-<!--  -->
+        <div class="col">
+            <table class="table table-striped ">
+                <thead style="display:inline-block;">
+                    <tr >
+                        <th>Actividad</th>
+                        <th>Lugar</th>
+                        <th>Descripcion</th>  
+                        <th>ID</th>
+                 
+                    </tr>
+                </thead>
+                <tbody id="tarea-list"  style="display:inline-block;  height:500px; overflow-y: auto;overflow-x: hidden;">
+        
+                </tbody>
+        
+            </table>
+        </div>
+      </div>   
 
-    <table class="table table-striped ">
-        <thead>
-            <tr>
-                <th>Actividad</th>
-                <th>Lugar</th>
-                <th>descr</th>  
-                <th>ID</th>  
-            </tr>
-        </thead>
-        <tbody id="tarea-list">
 
-        </tbody>
-
-    </table>
   </div>
 
 <script type="text/javascript" src="app.js"></script>

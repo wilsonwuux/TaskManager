@@ -52,10 +52,13 @@ class  Ui{
         const container = document.querySelector('.container');
         const divColla =document.querySelector('#newAct')
         const btnColla =document.querySelector('#btnCollapse')
+        const coldiv=document.querySelector('.coldiv')
+        const rowdiv=document.querySelector('.rowdiv')
         const form = document.querySelector('#tarea-form')
+
         // ubicar la alerta en el centro
         // el contenedor inserta el div antes de el form 
-        container.insertBefore(div,btnColla,divColla,form)
+        container.insertBefore(div,rowdiv,coldiv,btnColla,divColla,form)
         setTimeout(()=>document.querySelector('.alert').remove(),3000)
     }
 
@@ -112,9 +115,10 @@ document.querySelector('#tarea-form').addEventListener('submit',(e)=>{
     const lugar = document.querySelector('#lugar').value;
     const description = document.querySelector('#description').value;
     const id=0;
+    var expresion = /[A-Za-z0-9]/
     if(actividad ===''&& lugar===''&& description===''){ 
         Ui.mostrarAlerta('COMPLETE LOS CAMPOS','danger')
-        }else if(actividad ===''){
+    }else if(actividad ===''){
     //mostar mensaje de clase ui 
     Ui.mostrarAlerta('complete campo ACTIVIDAD','danger')
     }else if(lugar===''){ 
@@ -122,20 +126,33 @@ document.querySelector('#tarea-form').addEventListener('submit',(e)=>{
     }else if(description===''){ 
     Ui.mostrarAlerta('complete campo DESCRIPCION','danger')
     }else{
-        // ya validado ubica informacion en la clase libro 
+        
+        if(expresion.test(actividad)!=true){
+            //mostar mensaje de clase ui 
+            Ui.mostrarAlerta('Caracteres incorrectos en ACTIVIDAD','danger')
+            }else if(expresion.test(lugar)!=true){ 
+            Ui.mostrarAlerta('Caracteres incorrectos en LUGAR','danger')
+            }else if(expresion.test(description)!=true){ 
+            Ui.mostrarAlerta('Caracteres incorrectos en DESCRIPCION','danger')
+            }else{// ya validado ubica informacion en la clase libro 
         const tarea = new Task(actividad,lugar,description,id);
         Datos.agregarUntarea(tarea)
 
         Ui.agregarTareaLista(tarea)
         Ui.mostrarAlerta('ACTIVIDAD AGREGADA','success')
         Ui.limpiarCampos()
-        location.reload()
+        location.reload()}
     }
 })
 
 document.querySelector('#tarea-list').addEventListener('click',(e)=>{
-   
-    Ui.eliminarTarea(e.target)
-    Datos.removerTarea(e.target.parentElement.previousElementSibling.textContent)
+    try {
+        Ui.eliminarTarea(e.target)
+        Datos.removerTarea(e.target.parentElement.previousElementSibling.textContent)
+      } catch (error) {
+      }
+      
+
+  
    
 })
